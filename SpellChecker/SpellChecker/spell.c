@@ -36,9 +36,18 @@ bool check_word(const char* word, hashmap_t hashtable[])
     char* lower_word = word;
     lower_string(lower_word);
     int bucket = hash_function(lower_word);
-    const char* hashmap_t_cursor = hashtable[bucket]->word;
+    char* hashmap_t_cursor = hashtable[bucket]->word;
     while(hashmap_t_cursor != NULL) {
-        
+        bool correct = true;
+        int sum = 0;
+        int word_length = strlen(word);
+
+        for (int i = 0; i < word_length; i++)
+        {
+            if(word[i] != hashmap_t_cursor[i])
+                return false;
+        }
+        return true;
     }
 //    Set int bucket to the output of hash_function(word).
 //    Set hashmap_t cursor equal to hashmap[bucket].

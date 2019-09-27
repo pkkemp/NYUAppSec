@@ -10,6 +10,6 @@
 #include "dictionary.h"
 
 int main(int argc, const char * argv[]) {
-    hashmap_t hashmap[1000];
+    hashmap_t hashmap[HASH_SIZE];
     load_dictionary("wordlist.txt", hashmap);
 }

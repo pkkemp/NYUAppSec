@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3A90F2323327CDE003C30F4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3A90F2223327CDE003C30F4 /* main.cpp */; };
-		B3A90F2B23327DD3003C30F4 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = B3A90F2A23327DD3003C30F4 /* dictionary.c */; };
+		B390631923392B6F00963124 /* test_main.c in Sources */ = {isa = PBXBuildFile; fileRef = B390631223392B6E00963124 /* test_main.c */; };
+		B390631A23392B6F00963124 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = B390631423392B6E00963124 /* Makefile */; };
+		B390632A23397B7300963124 /* spell.c in Sources */ = {isa = PBXBuildFile; fileRef = B390631F23397B7100963124 /* spell.c */; };
+		B390632B23397B7300963124 /* test_main.c in Sources */ = {isa = PBXBuildFile; fileRef = B390632123397B7200963124 /* test_main.c */; };
+		B390632C23397B7300963124 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = B390632323397B7200963124 /* Makefile */; };
+		B390632D23397B7300963124 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B390632623397B7200963124 /* main.c */; };
+		B390633023397D6500963124 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = B390632F23397D6500963124 /* dictionary.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,10 +29,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B390631223392B6E00963124 /* test_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_main.c; sourceTree = "<group>"; };
+		B390631323392B6E00963124 /* Pseudocode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pseudocode.txt; sourceTree = "<group>"; };
+		B390631423392B6E00963124 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		B390631523392B6E00963124 /* wordlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wordlist.txt; sourceTree = "<group>"; };
+		B390631623392B6F00963124 /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
+		B390631723392B6F00963124 /* test_worlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_worlist.txt; sourceTree = "<group>"; };
+		B390631F23397B7100963124 /* spell.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = spell.c; sourceTree = "<group>"; };
+		B390632023397B7100963124 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
+		B390632123397B7200963124 /* test_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_main.c; sourceTree = "<group>"; };
+		B390632223397B7200963124 /* test_worlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_worlist.txt; sourceTree = "<group>"; };
+		B390632323397B7200963124 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		B390632423397B7200963124 /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
+		B390632523397B7200963124 /* Pseudocode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pseudocode.txt; sourceTree = "<group>"; };
+		B390632623397B7200963124 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		B390632723397B7200963124 /* wordlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wordlist.txt; sourceTree = "<group>"; };
+		B390632823397B7300963124 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		B390632F23397D6500963124 /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary.c; sourceTree = "<group>"; };
 		B3A90F1F23327CDE003C30F4 /* SpellChecker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpellChecker; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3A90F2223327CDE003C30F4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B3A90F2923327DD3003C30F4 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
-		B3A90F2A23327DD3003C30F4 /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +79,23 @@
 		B3A90F2123327CDE003C30F4 /* SpellChecker */ = {
 			isa = PBXGroup;
 			children = (
-				B3A90F2A23327DD3003C30F4 /* dictionary.c */,
-				B3A90F2923327DD3003C30F4 /* dictionary.h */,
-				B3A90F2223327CDE003C30F4 /* main.cpp */,
+				B390632F23397D6500963124 /* dictionary.c */,
+				B390632023397B7100963124 /* dictionary.h */,
+				B390632623397B7200963124 /* main.c */,
+				B390632823397B7300963124 /* main.h */,
+				B390632323397B7200963124 /* Makefile */,
+				B390632523397B7200963124 /* Pseudocode.txt */,
+				B390631F23397B7100963124 /* spell.c */,
+				B390632123397B7200963124 /* test_main.c */,
+				B390632223397B7200963124 /* test_worlist.txt */,
+				B390632423397B7200963124 /* test1.txt */,
+				B390632723397B7200963124 /* wordlist.txt */,
+				B390631423392B6E00963124 /* Makefile */,
+				B390631323392B6E00963124 /* Pseudocode.txt */,
+				B390631223392B6E00963124 /* test_main.c */,
+				B390631723392B6F00963124 /* test_worlist.txt */,
+				B390631623392B6F00963124 /* test1.txt */,
+				B390631523392B6E00963124 /* wordlist.txt */,
 			);
 			path = SpellChecker;
 			sourceTree = "<group>";
@@ -123,8 +156,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3A90F2323327CDE003C30F4 /* main.cpp in Sources */,
-				B3A90F2B23327DD3003C30F4 /* dictionary.c in Sources */,
+				B390632A23397B7300963124 /* spell.c in Sources */,
+				B390631A23392B6F00963124 /* Makefile in Sources */,
+				B390631923392B6F00963124 /* test_main.c in Sources */,
+				B390632D23397B7300963124 /* main.c in Sources */,
+				B390632C23397B7300963124 /* Makefile in Sources */,
+				B390633023397D6500963124 /* dictionary.c in Sources */,
+				B390632B23397B7300963124 /* test_main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,10 +19,26 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]);
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]);
 bool check_word(const char* word, hashmap_t hashtable[]);
 
-
+void lower_string(char s[]) {
+   int c = 0;
+   
+   while (s[c] != '\0') {
+      if (s[c] >= 'A' && s[c] <= 'Z') {
+         s[c] = s[c] + 32;
+      }
+      c++;
+   }
+}
 
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+    char* lower_word = word;
+    lower_string(lower_word);
+    int bucket = hash_function(lower_word);
+    const char* hashmap_t_cursor = hashtable[bucket]->word;
+    while(hashmap_t_cursor != NULL) {
+        
+    }
 //    Set int bucket to the output of hash_function(word).
 //    Set hashmap_t cursor equal to hashmap[bucket].
 //    While cursor is not NULL:
@@ -101,7 +117,7 @@ char * read_line (FILE *file)
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 {
     //File pointer for our dictionary
-    FILE *word_list  = fopen("wordlist.txt", "r"); // read only
+    FILE *word_list  = fopen("/Users/prestonkemp/Documents/NYUAppSec/SpellChecker/SpellChecker/wordlist.txt", "r"); // read only
     if(word_list != NULL) {
         for(int i = 0; i < HASH_SIZE; i++) {
             hashtable[i] = NULL;
@@ -154,6 +170,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 {
+    int num_misspelled = 0;
+    
 //    Set int num_misspelled to 0.
 //    While line in fp is not EOF (end of file):
 //    Read the line.

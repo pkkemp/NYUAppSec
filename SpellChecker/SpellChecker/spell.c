@@ -174,7 +174,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
     int num_misspelled = 0;
     char delim[] = " ";
 
-
     /* Open the file for reading */
     char *line_buf = NULL;
     size_t line_buf_size = 0;

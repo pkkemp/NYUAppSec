@@ -33,8 +33,10 @@ void lower_string(char s[]) {
 
 bool check_word(const char* word, hashmap_t hashtable[])
 {
-    char* lower_word = word;
+    char lower_word[LENGTH];
+    strcpy(lower_word, word);
     lower_string(lower_word);
+    printf(lower_word);
     int bucket = hash_function(lower_word);
     char* hashmap_t_cursor = hashtable[bucket]->word;
     while(hashmap_t_cursor != NULL) {
@@ -42,12 +44,13 @@ bool check_word(const char* word, hashmap_t hashtable[])
         int sum = 0;
         int word_length = strlen(word);
 
-        for (int i = 0; i < word_length; i++)
-        {
-            if(word[i] != hashmap_t_cursor[i])
-                return false;
-        }
-        return true;
+//        for (int i = 0; i < word_length; i++)
+//        {
+//            if(lower_word[i] != hashmap_t_cursor[i])
+//                return false;
+//        }
+        int same = strcmp(lower_word, word);
+        if(same == 0) return true;
     }
 //    Set int bucket to the output of hash_function(word).
 //    Set hashmap_t cursor equal to hashmap[bucket].
@@ -65,98 +68,81 @@ bool check_word(const char* word, hashmap_t hashtable[])
     return false;
 }
 
-//edit
-char * read_line (FILE *file)
-{
-    const int BUFFER_LENGTH = 1024;
-    char      buffer[BUFFER_LENGTH];
-    char     *result = 0;
-    int       length = 0;
-    int       len = 0;
-    size_t    result_len = 0;
-
-    while (!feof (file)) {
-        if (!fgets (buffer, BUFFER_LENGTH, file)) {
-            return result;
-        }
-
-        len = strlen (buffer);
-
-        length += len;
-        char *tmp = (char *) malloc ((length + 1) * sizeof (char));
-
-        if (!tmp) {
-            printf ("error while trying to allocate %ld bytes. \n",
-                (length + 1) * sizeof (char));
-            return result;
-        }
-
-        tmp[0] = '\0';
-
-        if (result) {
-            strcpy (tmp, result);
-            free (result);
-            result = tmp;
-        } else {
-            result = tmp;
-        }
-
-        strcat (result, buffer);
-
-        if (strstr (buffer, "\n"))
-            break;
-    }
-
-    if (result) {
-        result_len = strlen(result);
-
-        if (result_len > 1 && result[result_len - 2] == '\r') {
-            result[result_len - 2] = '\0';
-        } else if (result_len > 0) {
-            if (result[result_len - 1] == '\n'
-                || result[result_len - 1] == '\r') {
-                result[result_len - 1] = '\0';
-            }
-        }
-    }
-
-    return result;
-}
-
 
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 {
     //File pointer for our dictionary
-    FILE *word_list  = fopen("/Users/prestonkemp/Documents/NYUAppSec/SpellChecker/SpellChecker/wordlist.txt", "r"); // read only
-    if(word_list != NULL) {
-        for(int i = 0; i < HASH_SIZE; i++) {
-            hashtable[i] = NULL;
-        }
-        char buffer[LENGTH + 1];
-
-        char   *word = NULL;
-
-        while ((word = read_line(word_list)) != NULL) {
-            node new_node;
-            strcpy(new_node.word, word);
-            new_node.next = NULL;
-            //hashtable[wordcount] = &new_node;
-            
-            int bucket = hash_function(word);
-            if(hashtable[bucket] == NULL) {
-                hashtable[bucket] = &new_node;
-            }
-            else {
-                new_node.next = hashtable[bucket];
-                hashtable[bucket] = &new_node;
-            }
-        }
-        fclose(word_list);
-        return true;
-    }
-        
+    FILE *word_list  = fopen(dictionary_file, "r"); // read only
     
-    return false;
+    for(int i = 0; i < HASH_SIZE; i++) {
+        hashtable[i] = NULL;
+    }
+    
+    /* Open the file for reading */
+    char *line_buf = NULL;
+    size_t line_buf_size = 0;
+    int line_count = 0;
+    ssize_t line_size;
+    FILE *fp = fopen(dictionary_file, "r");
+    if (!fp)
+    {
+      fprintf(stderr, "Error opening file '%s'\n", dictionary_file);
+      return false;
+    }
+    
+    /* Get the first line of the file. */
+     line_size = getline(&line_buf, &line_buf_size, fp);
+
+     /* Loop through until we are done with the file. */
+     while (line_size >= 0)
+     {
+       /* Increment our line count */
+       line_count++;
+         
+       node new_node;
+       strcpy(new_node.word, line_buf);
+       new_node.next = NULL;
+         
+         
+         int bucket = hash_function(line_buf);
+         if(hashtable[bucket] == NULL) {
+             hashtable[bucket] = &new_node;
+         }
+         else {
+             new_node.next = hashtable[bucket];
+             hashtable[bucket] = &new_node;
+         }
+
+       /* Show the line details */
+//       printf("line[%06d]: chars=%06zd, buf size=%06zu, contents: %s", line_count,
+//           line_size, line_buf_size, line_buf);
+
+       /* Get the next line */
+         
+       //printf(line_buf);
+       //printf(hashtable[bucket]);
+       line_size = getline(&line_buf, &line_buf_size, fp);
+         
+     }
+    fclose(word_list);
+    return true;
+    
+    
+//    if(word_list != NULL && 0) {
+//
+//        char buffer[LENGTH + 1];
+//
+//        char   *word = NULL;
+//
+//        while ((word = read_line(word_list)) != NULL) {
+//
+//            //hashtable[wordcount] = &new_node;
+//
+//
+//            printf("\n");
+//        }
+
+}
 
     
 //    Initialize all values in hash table to NULL.
@@ -174,14 +160,62 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 //            Set new_node->next to hashtable[bucket].
 //            Set hashtable[bucoket] t new_node.
 //            Close dict_file.
-}
 
+char * remove_punctuation(char *word) {
+    char delim[] = {"."};
+    char* token = strtok(word, delim);
+    printf(token);
+    return token;
+}
 
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 {
     int num_misspelled = 0;
+    char delim[] = " ";
+
+
+    /* Open the file for reading */
+    char *line_buf = NULL;
+    size_t line_buf_size = 0;
+    int line_count = 0;
+    ssize_t line_size;
+//    FILE *fp = fopen(FILENAME, "r");
+    if (!fp)
+    {
+      return false;
+    }
+
+    /* Get the first line of the file. */
+    line_size = getline(&line_buf, &line_buf_size, fp);
+
+    /* Loop through until we are done with the file. */
+    while (line_size >= 0)
+    {
+      // Returns first token
+      char* token = strtok(line_buf, delim);
     
+      // Keep printing tokens while one of the
+      // delimiters present in str[].
+      while (token != NULL) {
+          //remove_punctuation(token);
+          printf("%s\n", token);
+          token = strtok(NULL, delim);
+      }
+      //*ptr = strtok(line_buf, delim);
+      //printf(*ptr);
+      /* Increment our line count */
+      line_count++;
+
+//      /* Show the line details */
+//      printf("line[%06d]: chars=%06zd, buf size=%06zu, contents: %s", line_count,
+//          line_size, line_buf_size, line_buf);
+
+      /* Get the next line */
+        printf(line_buf);
+      line_size = getline(&line_buf, &line_buf_size, fp);
+    }
+
 //    Set int num_misspelled to 0.
 //    While line in fp is not EOF (end of file):
 //    Read the line.
@@ -193,4 +227,5 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 //    Increment num_misspelled.
 //    Return num_misspelled.
     return false;
+    
 }

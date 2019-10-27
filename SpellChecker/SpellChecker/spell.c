@@ -27,31 +27,28 @@ void lower_string(char s[]) {
       if (s[c] >= 'A' && s[c] <= 'Z') {
          s[c] = s[c] + 32;
       }
+//      if (s[c] >= 33 && s[c] <= 46) {
+//          s[c] = " ";
+//       }
       c++;
    }
 }
 
 bool check_word(const char* word, hashmap_t hashtable[])
 {
-    char lower_word[LENGTH];
-    strcpy(lower_word, word);
-    lower_string(lower_word);
-    printf(lower_word);
-    int bucket = hash_function(lower_word);
-    char* hashmap_t_cursor = hashtable[bucket]->word;
-    while(hashmap_t_cursor != NULL) {
-        bool correct = true;
-        int sum = 0;
-        int word_length = strlen(word);
+    if(word != NULL) {
+    printf("%s ", word);
+    
+    int bucket = hash_function(word);
+    printf(hashtable[bucket]->word);
 
-//        for (int i = 0; i < word_length; i++)
-//        {
-//            if(lower_word[i] != hashmap_t_cursor[i])
-//                return false;
-//        }
-        int same = strcmp(lower_word, word);
-        if(same == 0) return true;
-    }
+//    if(hashmap_t_cursor != NULL && 0) {
+//        bool correct = true;
+//        int sum = 0;
+//        int word_length = strlen(word);
+//        int same = strcmp(lower_word, word);
+//        if(same == 0) return true;
+//    }
 //    Set int bucket to the output of hash_function(word).
 //    Set hashmap_t cursor equal to hashmap[bucket].
 //    While cursor is not NULL:
@@ -65,6 +62,7 @@ bool check_word(const char* word, hashmap_t hashtable[])
 //    return True.
 //    Set curosr to cursor->next.
 //    return False.
+    }
     return false;
 }
 
@@ -98,14 +96,15 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
      {
        /* Increment our line count */
        line_count++;
-         
-       node new_node;
+       struct node* new_node = (struct node*) malloc(sizeof(struct node));
+       //struct node new_node = { .word = "", .next =NULL};
        strcpy(new_node.word, line_buf);
-       new_node.next = NULL;
+       //struct node temp_node;
          
          
          int bucket = hash_function(line_buf);
          if(hashtable[bucket] == NULL) {
+             //memcpy(&temp_node, &new_node, sizeof(node));
              hashtable[bucket] = &new_node;
          }
          else {
@@ -125,6 +124,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
          
      }
     fclose(word_list);
+    printf(hashtable[200]->word);
+    printf(hashtable[181]->word);
+
     return true;
     
     
@@ -197,21 +199,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
       // Keep printing tokens while one of the
       // delimiters present in str[].
       while (token != NULL) {
-          //remove_punctuation(token);
-          printf("%s\n", token);
+          //printf("%s\n", token);
+          check_word(token, hashtable);
           token = strtok(NULL, delim);
       }
-      //*ptr = strtok(line_buf, delim);
-      //printf(*ptr);
-      /* Increment our line count */
       line_count++;
-
-//      /* Show the line details */
-//      printf("line[%06d]: chars=%06zd, buf size=%06zu, contents: %s", line_count,
-//          line_size, line_buf_size, line_buf);
-
       /* Get the next line */
-        printf(line_buf);
       line_size = getline(&line_buf, &line_buf_size, fp);
     }
 

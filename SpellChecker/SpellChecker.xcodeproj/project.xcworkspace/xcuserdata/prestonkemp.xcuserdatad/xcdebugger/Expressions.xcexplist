@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "read_line:spell.c">
+      </ContextState>
+      <ContextState
+         contextName = "load_dictionary:spell.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "bucket">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[668]">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[bucket]-&gt;word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_word:spell.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "hash_function(&quot;dog&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[314]">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[900]">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[bucket]-&gt;word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

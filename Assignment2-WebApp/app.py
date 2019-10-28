@@ -1,10 +1,14 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
-import unittest
+from flask_wtf.csrf import CSRFProtect
 
+import unittest, os
+
+app = Flask(__name__)
+csrf = CSRFProtect(app)
 userList = []
 session = False
-app = Flask(__name__)
-
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 # class UnitTests(unittest.TestCase):
 #     def test_findUser(self):
 
@@ -57,6 +61,7 @@ def findUser(username, userList):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    data = ""
     if request.method == "POST":
         uname = request.form["uname"]
         pword = request.form["pword"]
@@ -66,11 +71,12 @@ def login():
             if theUser.password == pword and theUser.twofactor == twofact:
                 global session
                 session = True
-                return redirect(url_for("spell_check"))
+                data = "success"
+                #return redirect(url_for("spell_check"))
 
 
 
-    return render_template("login.html")
+    return render_template("login.html", data = data)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -96,3 +102,4 @@ def register():
 
 if __name__ == "__main__":
     app.run(debug=True)
+

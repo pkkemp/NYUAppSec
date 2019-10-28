@@ -18,6 +18,9 @@
             <div class="col-sm-6">
                 <form method="POST">
                     <div class="form-group">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    </div>
+                    <div class="form-group">
                       <label for="email">Username : </label>
                       <input type="text" name="uname" class="form-control" id="uname">
                     </div>
@@ -31,6 +34,7 @@
                     </div>
                     <button type="submit" class="btn form-control btn-default">Login</button>
                 </form>
+                <p id='result'>{{ data }}</p>
             </div>
         </div>
     </div>

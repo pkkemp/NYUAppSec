@@ -43,7 +43,7 @@ def spell_check():
             inputtext = request.form["inputtext"]
             data.input = inputtext
             from subprocess import call
-            call(["./a.out", "args", "to", "spa"])
+            #call(["./a.out"])
             if inputtext is not None and inputtext is not "" :
                 return render_template("spell_check.html", data = data)
         return render_template("spell_check.html", data=data)
@@ -60,9 +60,10 @@ def login():
     if request.method == "POST":
         uname = request.form["uname"]
         pword = request.form["pword"]
+        twofact = request.form["2fa"]
         theUser = findUser(uname, userList)
         if theUser is not None:
-            if theUser.password == pword:
+            if theUser.password == pword and theUser.twofactor == twofact:
                 global session
                 session = True
                 return redirect(url_for("spell_check"))

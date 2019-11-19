@@ -47,6 +47,15 @@ bool check_word(const char* word, hashmap_t hashtable[])
                 return true;
             cursor = cursor->next;
         }
+//        bucket = hash_function(word);
+//        cursor = hashtable[bucket];
+//        while(cursor->next) {
+//            char ctmp
+//            int match = strcmp(cursor->word, word);
+//            if(match == 0)
+//                return true;
+//            cursor = cursor->next;
+//        }
 
 //    if(hashmap_t_cursor != NULL && 0) {
 //        bool correct = true;
@@ -77,6 +86,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 {
     //File pointer for our dictionary
     FILE *word_list  = fopen(dictionary_file, "r"); // read only
+    char delim[] = {"\n", " "};
     
     for(int i = 0; i < HASH_SIZE; i++) {
         hashtable[i] = NULL;
@@ -96,6 +106,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     
     /* Get the first line of the file. */
      line_size = getline(&line_buf, &line_buf_size, fp);
+     line_buf = strtok(line_buf, delim);
+     
 
      /* Loop through until we are done with the file. */
      while (line_size >= 0)
@@ -103,14 +115,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
        /* Increment our line count */
        line_count++;
        struct node* new_node = (struct node*) malloc(sizeof(struct node));
-       //struct node new_node = { .word = "", .next =NULL};
-         strcpy(new_node->word, line_buf);
+       strcpy(new_node->word, line_buf);
+       new_node->next = NULL;
        //struct node temp_node;
          
          
          int bucket = hash_function(line_buf);
          if(hashtable[bucket] == NULL) {
-             //memcpy(&temp_node, &new_node, sizeof(node));
              hashtable[bucket] = new_node;
          }
          else {
@@ -127,6 +138,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
        //printf(line_buf);
        //printf(hashtable[bucket]);
        line_size = getline(&line_buf, &line_buf_size, fp);
+       line_buf = strtok(line_buf, delim);
+
          
      }
     fclose(word_list);
@@ -169,7 +182,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 char * remove_punctuation(char *word) {
     char delim[] = {"."};
     char* token = strtok(word, delim);
-    printf(token);
     return token;
 }
 
@@ -203,7 +215,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
       // delimiters present in str[].
       while (token != NULL) {
           //printf("%s\n", token);
-          check_word(token, hashtable);
+          bool correct = check_word(token, hashtable);
+          if (!correct)
+              num_misspelled++;
           token = strtok(NULL, delim);
       }
       line_count++;
@@ -221,6 +235,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 //    Append word to misspelled.
 //    Increment num_misspelled.
 //    Return num_misspelled.
-    return 50;
+    return num_misspelled;
     
 }

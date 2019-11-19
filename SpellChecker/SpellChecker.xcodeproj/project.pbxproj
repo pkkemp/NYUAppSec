@@ -29,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B3185D6123848989001E76B7 /* testing.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testing.txt; sourceTree = "<group>"; };
 		B390631223392B6E00963124 /* test_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_main.c; sourceTree = "<group>"; };
 		B390631323392B6E00963124 /* Pseudocode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pseudocode.txt; sourceTree = "<group>"; };
 		B390631423392B6E00963124 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 				B390631323392B6E00963124 /* Pseudocode.txt */,
 				B390631223392B6E00963124 /* test_main.c */,
 				B390631723392B6F00963124 /* test_worlist.txt */,
+				B3185D6123848989001E76B7 /* testing.txt */,
 				B390631623392B6F00963124 /* test1.txt */,
 				B390631523392B6E00963124 /* wordlist.txt */,
 			);

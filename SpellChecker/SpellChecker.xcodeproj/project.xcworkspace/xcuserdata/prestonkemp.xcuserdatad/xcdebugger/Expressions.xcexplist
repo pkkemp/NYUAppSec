@@ -6,10 +6,32 @@
          contextName = "read_line:spell.c">
       </ContextState>
       <ContextState
+         contextName = "check_word:spell.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "hash_function(&quot;Tupi\n&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[bucket]-&gt;word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_words:spell.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "hash_function(token)">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[hash_function(token)]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "load_dictionary:spell.c">
          <PersistentStrings>
             <PersistentString
-               value = "hashtable[bucket]">
+               value = "hashtable[bucket]-&gt;word">
             </PersistentString>
             <PersistentString
                value = "hash_function(&quot;bulldog&quot;)">
@@ -21,36 +43,10 @@
                value = "bucket">
             </PersistentString>
             <PersistentString
-               value = "hashtable[745]">
-            </PersistentString>
-            <PersistentString
-               value = "hashtable[bucket]-&gt;word">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "check_word:spell.c">
-         <PersistentStrings>
-            <PersistentString
-               value = "hash_function(&quot;dog&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "hashtable[314]">
-            </PersistentString>
-            <PersistentString
-               value = "hash_function(&quot;bulldog&quot;)">
+               value = "hashtable[bucket]">
             </PersistentString>
             <PersistentString
                value = "hashtable[745]">
-            </PersistentString>
-            <PersistentString
-               value = "hash_function(&quot;cat&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "hashtable[900]">
-            </PersistentString>
-            <PersistentString
-               value = "hashtable[bucket]-&gt;word">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

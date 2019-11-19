@@ -40,7 +40,13 @@ bool check_word(const char* word, hashmap_t hashtable[])
     printf("%s ", word);
     
     int bucket = hash_function(word);
-    printf(hashtable[bucket]->word);
+    hashmap_t cursor = hashtable[bucket];
+        while(cursor->next) {
+            int match = strcmp(cursor->word, word);
+            if(match == 0)
+                return true;
+            cursor = cursor->next;
+        }
 
 //    if(hashmap_t_cursor != NULL && 0) {
 //        bool correct = true;
@@ -98,18 +104,18 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
        line_count++;
        struct node* new_node = (struct node*) malloc(sizeof(struct node));
        //struct node new_node = { .word = "", .next =NULL};
-       strcpy(new_node.word, line_buf);
+         strcpy(new_node->word, line_buf);
        //struct node temp_node;
          
          
          int bucket = hash_function(line_buf);
          if(hashtable[bucket] == NULL) {
              //memcpy(&temp_node, &new_node, sizeof(node));
-             hashtable[bucket] = &new_node;
+             hashtable[bucket] = new_node;
          }
          else {
-             new_node.next = hashtable[bucket];
-             hashtable[bucket] = &new_node;
+             new_node->next = hashtable[bucket];
+             hashtable[bucket] = new_node;
          }
 
        /* Show the line details */
@@ -124,9 +130,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
          
      }
     fclose(word_list);
-    printf(hashtable[200]->word);
-    printf(hashtable[181]->word);
-
     return true;
     
     
@@ -184,7 +187,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 //    FILE *fp = fopen(FILENAME, "r");
     if (!fp)
     {
-      return false;
+      return num_misspelled;
     }
 
     /* Get the first line of the file. */
@@ -218,6 +221,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 //    Append word to misspelled.
 //    Increment num_misspelled.
 //    Return num_misspelled.
-    return false;
+    return 50;
     
 }

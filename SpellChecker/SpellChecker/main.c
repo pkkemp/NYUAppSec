@@ -14,5 +14,6 @@ int main(int argc, const char * argv[]) {
     char missed[1000];
     load_dictionary("/Users/prestonkemp/Documents/NYUAppSec/SpellChecker/SpellChecker/wordlist.txt", hashmap);
     FILE *fp = fopen("/Users/prestonkemp/Documents/NYUAppSec/SpellChecker/SpellChecker/test1.txt", "r");
-    check_words(fp, hashmap, missed);
+    int num = check_words(fp, hashmap, missed);
+    printf("Number misspelled: " + num);
 }

@@ -9,10 +9,19 @@
          contextName = "load_dictionary:spell.c">
          <PersistentStrings>
             <PersistentString
+               value = "hashtable[bucket]">
+            </PersistentString>
+            <PersistentString
+               value = "hash_function(&quot;bulldog&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "new_node">
+            </PersistentString>
+            <PersistentString
                value = "bucket">
             </PersistentString>
             <PersistentString
-               value = "hashtable[668]">
+               value = "hashtable[745]">
             </PersistentString>
             <PersistentString
                value = "hashtable[bucket]-&gt;word">
@@ -27,6 +36,15 @@
             </PersistentString>
             <PersistentString
                value = "hashtable[314]">
+            </PersistentString>
+            <PersistentString
+               value = "hash_function(&quot;bulldog&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "hashtable[745]">
+            </PersistentString>
+            <PersistentString
+               value = "hash_function(&quot;cat&quot;)">
             </PersistentString>
             <PersistentString
                value = "hashtable[900]">

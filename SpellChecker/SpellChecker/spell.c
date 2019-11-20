@@ -37,25 +37,32 @@ void lower_string(char s[]) {
 bool check_word(const char* word, hashmap_t hashtable[])
 {
     if(word != NULL) {
-    printf("%s ", word);
-    
-    int bucket = hash_function(word);
+    //printf("%s ", word);
+    char wtmp[LENGTH];
+    strcpy(wtmp, word);
+    lower_string(wtmp);
+    int bucket = hash_function(wtmp);
     hashmap_t cursor = hashtable[bucket];
         while(cursor->next) {
-            int match = strcmp(cursor->word, word);
+            int match = strcmp(cursor->word, wtmp);
             if(match == 0)
                 return true;
             cursor = cursor->next;
         }
-//        bucket = hash_function(word);
-//        cursor = hashtable[bucket];
-//        while(cursor->next) {
-//            char ctmp
-//            int match = strcmp(cursor->word, word);
-//            if(match == 0)
-//                return true;
-//            cursor = cursor->next;
-//        }
+        bucket = hash_function(word);
+        cursor = hashtable[bucket];
+        while(cursor->next) {
+            char ctmp[LENGTH];
+            char wtmp[LENGTH];
+            strcpy(ctmp, cursor->word);
+            strcpy(wtmp, word);
+            lower_string(ctmp);
+            lower_string(wtmp);
+            int match = strcmp(ctmp, wtmp);
+            if(match == 0)
+                return true;
+            cursor = cursor->next;
+        }
 
 //    if(hashmap_t_cursor != NULL && 0) {
 //        bool correct = true;
@@ -116,6 +123,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
        line_count++;
        struct node* new_node = (struct node*) malloc(sizeof(struct node));
        strcpy(new_node->word, line_buf);
+       lower_string(new_node->word);
        new_node->next = NULL;
        //struct node temp_node;
          
@@ -179,11 +187,28 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 //            Set hashtable[bucoket] t new_node.
 //            Close dict_file.
 
-char * remove_punctuation(char *word) {
-    char delim[] = {"."};
-    char* token = strtok(word, delim);
-    return token;
+//void remove_punctuation(char *word) {
+//    char delim[] = {"."};
+//    word = strtok(word, delim);
+//}
+
+char *remove_punctuation(const char *string)
+{
+  char delim[] = {".", ","};
+  char * newstr = malloc(strlen(string) + 1);
+  int counter = 0;
+ 
+  for ( ; *string; string++) {
+    if (!strchr(delim, *string)) {
+      newstr[ counter ] = *string;
+      ++ counter;
+    }
+  }
+ 
+  newstr[counter] = 0;
+  return newstr;
 }
+ 
 
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
@@ -210,12 +235,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
     {
       // Returns first token
       char* token = strtok(line_buf, delim);
+      token = remove_punctuation(token);
     
       // Keep printing tokens while one of the
       // delimiters present in str[].
       while (token != NULL) {
           //printf("%s\n", token);
+          token = remove_punctuation(token);
           bool correct = check_word(token, hashtable);
+
           if (!correct)
               num_misspelled++;
           token = strtok(NULL, delim);

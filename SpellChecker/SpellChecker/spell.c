@@ -1,11 +1,3 @@
-//
-//  main.c
-//  SpellChecker
-//
-//  Created by Preston Kemp on 9/18/19.
-//  Copyright © 2019 Preston Kemp. All rights reserved.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +10,6 @@ const int MAX_HASH_TABLE_SIZE = 1000;
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]);
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]);
 bool check_word(const char* word, hashmap_t hashtable[]);
-
 
 void lower_string(char s[]) {
    int c = 0;
@@ -244,8 +235,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
           token = remove_punctuation(token);
           bool correct = check_word(token, hashtable);
 
-          if (!correct)
+          if (!correct) {
+              char *stringa1 = (char*) malloc((LENGTH)*sizeof(char));
+              strcpy(stringa1, token);
+              misspelled[num_misspelled] = stringa1;
               num_misspelled++;
+          }
           token = strtok(NULL, delim);
       }
       line_count++;
@@ -264,5 +259,4 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 //    Increment num_misspelled.
 //    Return num_misspelled.
     return num_misspelled;
-    
 }

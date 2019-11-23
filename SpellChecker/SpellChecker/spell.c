@@ -77,7 +77,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 {
     //File pointer for our dictionary
     FILE *word_list  = fopen(dictionary_file, "r"); // read only
-    char delim[] = {"\n", " "};
+    char delim[] = {"\n"};
     
     for(int i = 0; i < HASH_SIZE; i++) {
         hashtable[i] = NULL;
@@ -163,7 +163,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 
 char *remove_punctuation(const char *string)
 {
-  char delim[] = {".", ","};
+  char delim[] = {'.', ','};
   char * newstr = malloc(strlen(string) + 1);
   int counter = 0;
  

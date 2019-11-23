@@ -55,13 +55,6 @@ bool check_word(const char* word, hashmap_t hashtable[])
             cursor = cursor->next;
         }
 
-//    if(hashmap_t_cursor != NULL && 0) {
-//        bool correct = true;
-//        int sum = 0;
-//        int word_length = strlen(word);
-//        int same = strcmp(lower_word, word);
-//        if(same == 0) return true;
-//    }
 //    Set int bucket to the output of hash_function(word).
 //    Set hashmap_t cursor equal to hashmap[bucket].
 //    While cursor is not NULL:
@@ -197,7 +190,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
     size_t line_buf_size = 0;
     int line_count = 0;
     ssize_t line_size;
-//    FILE *fp = fopen(FILENAME, "r");
     if (!fp)
     {
       return num_misspelled;
@@ -216,7 +208,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
       // Keep printing tokens while one of the
       // delimiters present in str[].
       while (token != NULL) {
-          //printf("%s\n", token);
           token = remove_punctuation(token);
           bool correct = check_word(token, hashtable);
 

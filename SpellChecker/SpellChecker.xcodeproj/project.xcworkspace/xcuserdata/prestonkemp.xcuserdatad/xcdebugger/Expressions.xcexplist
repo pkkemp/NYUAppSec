@@ -9,15 +9,20 @@
          contextName = "check_word:spell.c">
          <PersistentStrings>
             <PersistentString
-               value = "hash_function(&quot;Tupi\n&quot;)">
+               value = "hashtable[bucket]-&gt;word">
             </PersistentString>
             <PersistentString
-               value = "hashtable[bucket]-&gt;word">
+               value = "hash_function(&quot;Tupi\n&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "main:main.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "missed[1]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "check_words:spell.c">
@@ -46,7 +51,7 @@
          contextName = "load_dictionary:spell.c">
          <PersistentStrings>
             <PersistentString
-               value = "hashtable[bucket]-&gt;word">
+               value = "hashtable[745]">
             </PersistentString>
             <PersistentString
                value = "hash_function(&quot;bulldog&quot;)">
@@ -61,7 +66,7 @@
                value = "hashtable[bucket]">
             </PersistentString>
             <PersistentString
-               value = "hashtable[745]">
+               value = "hashtable[bucket]-&gt;word">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -143,21 +143,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
      }
     fclose(word_list);
     return true;
-    
-    
-//    if(word_list != NULL && 0) {
-//
-//        char buffer[LENGTH + 1];
-//
-//        char   *word = NULL;
-//
-//        while ((word = read_line(word_list)) != NULL) {
-//
-//            //hashtable[wordcount] = &new_node;
-//
-//
-//            printf("\n");
-//        }
 
 }
 

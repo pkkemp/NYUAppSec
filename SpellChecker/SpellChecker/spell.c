@@ -84,9 +84,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     }
     
     /* Open the file for reading */
-    char *line_buf = NULL;
     char buffer[LENGTH];
-    size_t line_buf_size = 32;
     bool gotLine;
     int line_count = 0;
     ssize_t line_size;
@@ -99,6 +97,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     
     /* Get the first line of the file. */
      gotLine = fgets(buffer, LENGTH, fp);
+     strtok(buffer, delim);
      line_size = strlen(buffer);
      //line_size = getline(&line_buf, &line_buf_size, fp);
      //line_buf = strtok(buffer, delim);
@@ -131,6 +130,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 
 
        gotLine = fgets(buffer, LENGTH, fp);
+       strtok(buffer, delim);
        line_size = strlen(buffer);
 
          
@@ -164,7 +164,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 
 char *remove_punctuation(const char *string)
 {
-  char delim[] = {'.', ','};
+  char delim[] = {'.', ',', '\n'};
   char * newstr = malloc(strlen(string) + 1);
   int counter = 0;
  

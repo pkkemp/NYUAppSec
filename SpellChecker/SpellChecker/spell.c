@@ -18,9 +18,6 @@ void lower_string(char s[]) {
       if (s[c] >= 'A' && s[c] <= 'Z') {
          s[c] = s[c] + 32;
       }
-//      if (s[c] >= 33 && s[c] <= 46) {
-//          s[c] = " ";
-//       }
       c++;
    }
 }
@@ -54,20 +51,6 @@ bool check_word(const char* word, hashmap_t hashtable[])
                 return true;
             cursor = cursor->next;
         }
-
-//    Set int bucket to the output of hash_function(word).
-//    Set hashmap_t cursor equal to hashmap[bucket].
-//    While cursor is not NULL:
-//    If word equals cursor->word:
-//    return True.
-//    Set curosr to cursor->next.
-//    Set int bucket to the output of hash_function(word).
-//    Set hashmap_t cursor equal to hashmap[bucket].
-//    While cursor is  not NULL:
-//    If lower_case(word) equals curosr->word:
-//    return True.
-//    Set curosr to cursor->next.
-//    return False.
     }
     return false;
 }
@@ -228,15 +211,5 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
       line_size = strlen(buffer);
     }
 
-//    Set int num_misspelled to 0.
-//    While line in fp is not EOF (end of file):
-//    Read the line.
-//    Split the line on spaces.
-//    For each word in line:
-//    Remove punctuation from beginning and end of word.
-//    If not check_word(word):
-//    Append word to misspelled.
-//    Increment num_misspelled.
-//    Return num_misspelled.
     return num_misspelled;
 }

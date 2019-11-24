@@ -25,6 +25,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "remove_punctuation:spell.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "pch-newstr+1">
+            </PersistentString>
+            <PersistentString
+               value = "strlen(string)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "check_words:spell.c">
          <PersistentStrings>
             <PersistentString

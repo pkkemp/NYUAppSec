@@ -85,7 +85,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     
     /* Open the file for reading */
     char *line_buf = NULL;
-    size_t line_buf_size = 0;
+    char buffer[LENGTH];
+    size_t line_buf_size = 32;
+    bool gotLine;
     int line_count = 0;
     ssize_t line_size;
     FILE *fp = fopen(dictionary_file, "r");
@@ -96,23 +98,25 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
     }
     
     /* Get the first line of the file. */
-     line_size = getline(&line_buf, &line_buf_size, fp);
-     line_buf = strtok(line_buf, delim);
+     gotLine = fgets(buffer, LENGTH, fp);
+     line_size = strlen(buffer);
+     //line_size = getline(&line_buf, &line_buf_size, fp);
+     //line_buf = strtok(buffer, delim);
      
 
      /* Loop through until we are done with the file. */
-     while (line_size >= 0)
+     while (line_size >= 0 && gotLine)
      {
        /* Increment our line count */
        line_count++;
        struct node* new_node = (struct node*) malloc(sizeof(struct node));
-       strcpy(new_node->word, line_buf);
+       strcpy(new_node->word, buffer);
        lower_string(new_node->word);
        new_node->next = NULL;
        //struct node temp_node;
          
          
-         int bucket = hash_function(line_buf);
+         int bucket = hash_function(buffer);
          if(hashtable[bucket] == NULL) {
              hashtable[bucket] = new_node;
          }
@@ -125,12 +129,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 //       printf("line[%06d]: chars=%06zd, buf size=%06zu, contents: %s", line_count,
 //           line_size, line_buf_size, line_buf);
 
-       /* Get the next line */
-         
-       //printf(line_buf);
-       //printf(hashtable[bucket]);
-       line_size = getline(&line_buf, &line_buf_size, fp);
-       line_buf = strtok(line_buf, delim);
+
+       gotLine = fgets(buffer, LENGTH, fp);
+       line_size = strlen(buffer);
 
          
      }
@@ -186,8 +187,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
     char delim[] = " ";
 
     /* Open the file for reading */
-    char *line_buf = NULL;
-    size_t line_buf_size = 0;
+    char buffer[LENGTH];
+    bool gotLine;
     int line_count = 0;
     ssize_t line_size;
     if (!fp)
@@ -196,13 +197,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
     }
 
     /* Get the first line of the file. */
-    line_size = getline(&line_buf, &line_buf_size, fp);
+    gotLine = fgets(buffer, LENGTH, fp);
+    line_size = strlen(buffer);
+    
 
     /* Loop through until we are done with the file. */
-    while (line_size >= 0)
+    while (line_size >= 0 && gotLine)
     {
       // Returns first token
-      char* token = strtok(line_buf, delim);
+      char* token = strtok(buffer, delim);
       token = remove_punctuation(token);
     
       // Keep printing tokens while one of the
@@ -221,7 +224,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
       }
       line_count++;
       /* Get the next line */
-      line_size = getline(&line_buf, &line_buf_size, fp);
+      gotLine = fgets(buffer, LENGTH, fp);
+      line_size = strlen(buffer);
     }
 
 //    Set int num_misspelled to 0.

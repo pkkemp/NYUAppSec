@@ -123,37 +123,18 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[])
 
 }
 
-    
-//    Initialize all values in hash table to NULL.
-//    Open dict_file from path stored in dictionary.
-//    If dict_file is NULL:
-//    return false.
-//    While word in dict_file is not EOF (end of file):
-//    Set hashmap_t new_node to a new node.
-//    Set new_node->next to NULL.
-//    Set new_node->word equal to word.
-//    Set int bucket to hash_function(word).
-//    if hashtable[bucket] is NULL:
-//        Set hashtable[bucket] to new_node.
-//        else:
-//            Set new_node->next to hashtable[bucket].
-//            Set hashtable[bucoket] t new_node.
-//            Close dict_file.
-
-//void remove_punctuation(char *word) {
-//    char delim[] = {"."};
-//    word = strtok(word, delim);
-//}
-
 char *remove_punctuation(const char *string)
 {
   char delim[] = {'.', ',', '\n'};
   char * newstr = malloc(strlen(string) + 1);
   int counter = 0;
+  const char *sptr = strtok(string, "\n");
+  int length = strlen(sptr);
+    
  
-  for ( ; *string; string++) {
-    if (!strchr(delim, *string)) {
-      newstr[ counter ] = *string;
+  for ( ; *sptr; sptr++) {
+      if(!strchr(delim, *sptr) || counter < length) {
+      newstr[ counter ] = *sptr;
       ++ counter;
     }
   }
@@ -162,7 +143,6 @@ char *remove_punctuation(const char *string)
   return newstr;
 }
  
-
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 {
